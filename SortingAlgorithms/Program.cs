@@ -53,12 +53,19 @@ namespace SortingAlgorithms
                     ++leftIndex;
                     --rightIndex;
                 }
-
-                arr = QuickSort(arr, 0, rightIndex);
-                arr = QuickSort(arr, rightIndex + 1, arr.Length - 1);
             }
 
+            arr = QuickSort(arr, 0, rightIndex);
+            arr = QuickSort(arr, rightIndex + 1, arr.Length - 1);
+
             return arr;
+        }
+
+        private static void Swap(int[] arr, int leftIndex, int rightIndex)
+        {
+            int temp = arr[leftIndex];
+            arr[leftIndex] = arr[rightIndex];
+            arr[rightIndex] = arr[leftIndex];
         }
     }
 }
