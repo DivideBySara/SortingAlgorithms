@@ -28,7 +28,37 @@ namespace SortingAlgorithms
 
         private static int[] QuickSort(int[] arr, int leftIndex, int rightIndex)
         {
-            throw new NotImplementedException();
+            // 1. Choose a pivot value
+            int pivotValue = arr[leftIndex];
+
+            // 2. Compare indices to pivotValue
+            while (leftIndex < rightIndex)
+            {
+                if (arr[leftIndex] >= pivotValue && arr[rightIndex] < pivotValue)
+                {
+                    Swap(arr, leftIndex, rightIndex);
+                    ++leftIndex;
+                    --rightIndex;
+                }
+                else if (arr[leftIndex] >= pivotValue)
+                {
+                    --rightIndex;
+                }
+                else if (arr[rightIndex] < pivotValue)
+                {
+                    ++leftIndex;
+                }
+                else // arr[leftIndex] < pivotValue && arr[rightIndex] >= pivotValue
+                {
+                    ++leftIndex;
+                    --rightIndex;
+                }
+
+                arr = QuickSort(arr, 0, rightIndex);
+                arr = QuickSort(arr, rightIndex + 1, arr.Length - 1);
+            }
+
+            return arr;
         }
     }
 }
