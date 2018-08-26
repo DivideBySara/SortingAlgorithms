@@ -16,7 +16,7 @@ namespace SortingAlgorithms
             int[] arr = { 3, 4, 1, 2 };
             Console.WriteLine($"\nStarting array: {string.Join(" ", arr)}");
 
-            //arr = QuickSort(arr, 0, arr.Length - 1);
+            arr = QuickSort(arr, 0, arr.Length - 1);
             Console.WriteLine($"\nEnding array: {string.Join(" ", arr)}");
 
             Console.ReadKey();
@@ -24,37 +24,35 @@ namespace SortingAlgorithms
 
         private static int[] QuickSort(int[] arr, int leftIndex, int rightIndex)
         {
-            // 1. Choose a pivot value
-            int pivotValue = arr[leftIndex];
-
-            // 2. Compare indices to pivotValue
-            while (leftIndex < rightIndex)
+            if (leftIndex < rightIndex)
             {
-                if (arr[leftIndex] >= pivotValue && arr[rightIndex] < pivotValue)
+                int partition = Partition(arr, leftIndex, rightIndex);
+
+                arr = QuickSort(arr, 0, rightIndex);
+                arr = QuickSort(arr, rightIndex + 1, arr.Length - 1);
+            }
+
+            return arr;
+        }
+
+        private static int Partition(int[] arr, int leftIndex, int rightIndex)
+        {
+            // Choose a pivot value
+            int pivotValue = arr[leftIndex];
+            int small = leftIndex - 1;
+
+            for (int i = leftIndex; i < rightIndex; ++i)
+            {
+                if (arr[i] < pivotValue)
                 {
-                    Swap(arr, leftIndex, rightIndex);
-                    ++leftIndex;
-                    --rightIndex;
-                }
-                else if (arr[leftIndex] >= pivotValue)
-                {
-                    --rightIndex;
-                }
-                else if (arr[rightIndex] < pivotValue)
-                {
-                    ++leftIndex;
-                }
-                else // arr[leftIndex] < pivotValue && arr[rightIndex] >= pivotValue
-                {
-                    ++leftIndex;
-                    --rightIndex;
+                    ++small;
+                    Swap(arr, i, small);
                 }
             }
 
-            arr = QuickSort(arr, 0, rightIndex);
-            arr = QuickSort(arr, rightIndex + 1, arr.Length - 1);
+            Swap(arr, rightIndex, small + 1);
 
-            return arr;
+            return small + 1;
         }
 
         private static void Swap(int[] arr, int leftIndex, int rightIndex)
