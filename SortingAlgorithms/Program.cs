@@ -14,14 +14,10 @@ namespace SortingAlgorithms
             Console.WriteLine("1. QuickSort");
 
             int[] arr = { 3, 4, 1, 2 };
-            Console.WriteLine("\nStarting array: ");
-            foreach (int i in arr)
-            {
-                Console.Write(i + " ");
-            }
+            Console.WriteLine($"\nStarting array: {string.Join(" ", arr)}");
 
-            arr = QuickSort(arr, 0, arr.Length - 1);
-            Console.WriteLine("\n\nEnding array: ");
+            //arr = QuickSort(arr, 0, arr.Length - 1);
+            Console.WriteLine($"\nEnding array: {string.Join(" ", arr)}");
 
             Console.ReadKey();
         }
